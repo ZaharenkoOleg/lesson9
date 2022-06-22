@@ -1,0 +1,39 @@
+{
+	"random": "1",
+	"random float": "23.916",
+	"bool": "true",
+	"date": "1987-02-20",
+	"regEx": "helloooooooooooooooooooooooooooo to you",
+	"enum": "json",
+	"firstname": "Olwen",
+	"lastname": "Drus",
+	"city": "Ndola",
+	"country": "Bahamas",
+	"countryCode": "PE",
+	"email uses current data": "Olwen.Drus@gmail.com",
+	"email from expression": "Olwen.Drus@yopmail.com",
+	"array": [
+		"Rosabelle",
+		"Priscilla",
+		"Viviene",
+		"Ardys",
+		"Georgina"
+	],
+	"array of objects": [
+		{
+			"index": "0",
+			"index start at 5": "5"
+		},
+		{
+			"index": "1",
+			"index start at 5": "6"
+		},
+		{
+			"index": "2",
+			"index start at 5": "7"
+		}
+	],
+	"Lilith": {
+		"age": "67"
+	}
+}
