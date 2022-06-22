@@ -26,11 +26,12 @@ public class FileParseTest {
     }
 
     void csvTest(ZipFile zipFile, ZipEntry zipEntry) throws Exception {
-        CSVReader csvReader = new CSVReader(new InputStreamReader(zipFile.getInputStream(zipEntry), UTF_8));
-        List<String[]> csv = csvReader.readAll();
-        assertThat(csv).contains(
-                new String[]{"John", "Doe", "120 jefferson st.", "Riverside", " NJ", " 08075"}
-        );
+        try (CSVReader csvReader = new CSVReader(new InputStreamReader(zipFile.getInputStream(zipEntry), UTF_8))) {
+            List<String[]> csv = csvReader.readAll();
+            assertThat(csv).contains(
+                    new String[]{"John", "Doe", "120 jefferson st.", "Riverside", " NJ", " 08075"}
+            );
+        }
     }
 
     void xlsTest(ZipFile zipFile, ZipEntry zipEntry) throws Exception {
@@ -62,16 +63,14 @@ public class FileParseTest {
     @Test
     void jsonTest() throws Exception{
 
-        InputStream is = classLoader.getResourceAsStream("myJsonFile0.json");
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(new InputStreamReader(is, UTF_8));
+        JsonNode jsonNode;
+        try (InputStream is = classLoader.getResourceAsStream("myJsonFile0.json")) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            jsonNode = objectMapper.readTree(new InputStreamReader(is, UTF_8));
+        }
 
         assertThat(jsonNode.get("email from expression").asText()).isEqualTo("Olwen.Drus@yopmail.com");
         assertThat(jsonNode.withArray("array").toString()).isEqualTo( "[\"Rosabelle\",\"Priscilla\",\"Viviene\",\"Ardys\",\"Georgina\"]");
         assertThat(jsonNode.get("random").asInt()).isEqualTo(1);
-
-
-
-
     }
 }
